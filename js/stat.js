@@ -18,13 +18,33 @@
     let histogramGap = 50;
     let histogramPlayerColor = 'rgba(255, 0, 0, 1)';
 
+    //* Рандомный цвет гистограммы остальных игроков
+    let historamPlayersColor = function() {
+        let alpha = Math.random() * (1 - 0.2) + 0.2;
+        return `rgba(0, 83, 138, ${alpha.toFixed(1)})`;
+    };
+
     //* Массив игроков
-    let names = ['Вы', 'Марк', 'Питер', 'Джон'];
+    let names = ['Вы', 'Марк', 'Майкл', 'Джон'];
+
+    //* Функция перебора массива
+    function findInArr(arr) {
+        let randArr = arr[0];
+        for (let i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+            if (randArr < arr[i]) {
+                randArr = arr[i];
+            }
+        }
+
+        return randArr;
+    }
+
 
     //* Отрисовка облака с результатми игроков
     window.renderStatistics = function(ctx, names, times) {
 
-        
+
 
     }
 
