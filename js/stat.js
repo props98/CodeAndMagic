@@ -26,6 +26,7 @@
     //* Массив игроков
     let names = ['Вы', 'Марк', 'Майкл', 'Джон'];
 
+    //TODO
     //* Функция перебора массива
     function findInArr(arr) {
         let randArr = arr[0];
