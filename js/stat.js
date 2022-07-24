@@ -3,19 +3,18 @@
 (function() {
 
     //* Размеры и координаты облака
-    const CLOUD_WIDTH = 420;
-    const CLOUD_HEIGHT = 270;
+    const CLOUD_W = 420;
+    const CLOUD_H = 270;
     const CLOUD_BG = '#fff';
-    const CLOUD_TEXT_COLOR = 'black';
-    const CLOUD_TEXT_FONT = '16px PT Mono';
-    const CLOUD_POSITION_X = 100;
-    const CLOUD_POSITION_Y = 10;
-
+    const CLOUD_TEXT_HEIGHT = 20;
+    const CLOUD_X = 100;
+    const CLOUD_Y = 10;
+    const GAP = 20;
+    
     //* Гистограмма времен участников
-    let histogramHeigt = 150;
-    let histogramWidth = 40;
-    let histogramGap = 50;
-    let histogramPlayerColor = 'rgba(255, 0, 0, 1)';
+    let barWidth = 50;
+    let barHeight= CLOUD_H - (((GAP + GAP) * 2) + CLOUD_TEXT_HEIGHT + GAP);
+    console.log(barHeight);
 
     //* Рандомный цвет гистограммы остальных игроков
     let historamPlayersColor = function() {
@@ -28,30 +27,39 @@
 
     //TODO
     //* Функция перебора массива
-    function findInArr(arr) {
-        let randArr = arr[0];
-        for (let i = 0; i < arr.length; i++) {
-            if (randArr < arr[i]) {
-                randArr = arr[i];
-            }
-        }
-        return randArr;
-    }
+    // function findInArr(arr) {
+    //     let randArr = arr[0];
+    //     for (let i = 0; i < arr.length; i++) {
+    //         if (randArr < arr[i]) {
+    //             randArr = arr[i];
+    //         }
+    //     }
+    //     return randArr;
+    // } 
 
     //* Функция для создания облака
     let renderCloud = function(ctx, x, y, color) {
         ctx.fillStyle = color;
-        ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
+        ctx.fillRect(x, y, CLOUD_W, CLOUD_H);
     }
 
     //* Отрисовка облака с результатми игроков
     window.renderStatistics = function(ctx, names, times) {
-        //* Рисуем тень от облака со смещением в права и вниз
-        renderCloud(ctx, CLOUD_POSITION_X + 10, CLOUD_POSITION_Y + 10, 'rgba(0, 0, 0, 0.3)');
-        //* Рисуем основное облако
-        renderCloud(ctx, CLOUD_POSITION_X, CLOUD_POSITION_Y, CLOUD_BG);
+        //* Отрисовка тени и сомого облака с помощью функции
+        renderCloud(ctx, CLOUD_X + 10, CLOUD_Y + 10, 'rgba(0, 0, 0, 0.7)');
+        renderCloud(ctx, CLOUD_X, CLOUD_Y, CLOUD_BG);
+
+        //* Текст о победителях
+        ctx.fillStyle = '#000';
+        ctx.fillText('Ура вы победили!', CLOUD_X + GAP, GAP + GAP);
+        ctx.fillStyle = '#000';
+        ctx.fillText('Список результатов:', CLOUD_X + GAP, GAP + GAP + CLOUD_TEXT_HEIGHT);
+
+        //* Отрисовка гистограммы игроков
+        ctx.fillStyle = '#000';
+        ctx.fillText('Вы', CLOUD_X + (GAP * 2), CLOUD_H - CLOUD_Y);
+        ctx.fillRect(CLOUD_X + (GAP * 2), (GAP + GAP) * 2 + CLOUD_Y, barWidth, barHeight); 
 
     }
-
 
 })();
