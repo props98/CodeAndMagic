@@ -9,20 +9,17 @@
     const CLOUD_TEXT_HEIGHT = 20;
     const CLOUD_X = 100;
     const CLOUD_Y = 10;
-    const GAP = 20;
+    const GAP = 25;
     
     //* Гистограмма времени участников
-    let barWidth = 50;
-    let barHeight= CLOUD_H - (((GAP + GAP) * 2) + CLOUD_TEXT_HEIGHT + GAP);
+    let barWidth = 40;
+    let barHeight= CLOUD_H - (((GAP + GAP) * 2) + CLOUD_TEXT_HEIGHT + GAP); // 150
 
     //* Рандомный цвет других игроков
     let historamPlayersColor = function() {
         let alpha = Math.random() * (1 - 0.2) + 0.2;
         return `rgba(0, 83, 138, ${alpha.toFixed(1)})`;
     };
-
-    // //* Массив игроков
-    // let names = ['Вы', 'Марк', 'Майкл', 'Джон'];
 
     //* Создание облака
     let renderCloud = function(ctx, x, y, color) {
