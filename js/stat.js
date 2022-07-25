@@ -21,8 +21,8 @@
         return `rgba(0, 83, 138, ${alpha.toFixed(1)})`;
     };
 
-    //* Массив игроков
-    let names = ['Вы', 'Марк', 'Майкл', 'Джон'];
+    // //* Массив игроков
+    // let names = ['Вы', 'Марк', 'Майкл', 'Джон'];
 
     let renderCloud = function(ctx, x, y, color) {
         ctx.fillStyle = color;
@@ -65,6 +65,7 @@
             return Math.floor((barHeight * time) / maxTime);
         };
         
+        //* Отрисовка результатов
         for (let i = 0; i < names.length; i++) {
 
             if (names[i] === 'Вы') {
@@ -78,8 +79,7 @@
             ctx.fillText(Math.floor(times[i]), CLOUD_X + (GAP + GAP) + (barWidth + GAP + GAP) * i, -playerBarHeight + (CLOUD_H - CLOUD_Y - GAP) - 5);
             ctx.fillRect(CLOUD_X + (GAP + GAP) + (barWidth + GAP + GAP) * i, CLOUD_H - CLOUD_Y - GAP, barWidth, -playerBarHeight); 
             ctx.fillText(names[i], CLOUD_X + (GAP + GAP) + (barWidth + GAP + GAP) * i, CLOUD_H - CLOUD_Y);
-
-            console.log(Math.floor(playerBarHeight));
+            
         }
         
     }
