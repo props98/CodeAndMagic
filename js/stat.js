@@ -24,7 +24,6 @@
     //* Массив игроков
     let names = ['Вы', 'Марк', 'Майкл', 'Джон'];
 
-    //* Создание облака
     let renderCloud = function(ctx, x, y, color) {
         ctx.fillStyle = color;
         ctx.fillRect(x, y, CLOUD_W, CLOUD_H);
