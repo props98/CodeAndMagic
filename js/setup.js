@@ -24,7 +24,7 @@
         'Люпита', 
         'Вашингтон'
     ];
-    const WIZARD_LAST_NAME = [
+    const WIZARD_LAST_NAMES = [
         'да Марья', 
         'Верон', 
         'Мирабелла', 
@@ -34,7 +34,7 @@
         'Нионго', 
         'Ирвинг'
     ];
-    let coatColor = [
+    let coatColors = [
         'rgb(101, 137, 164)', 
         'rgb(241, 43, 107)', 
         'rgb(146, 100, 161)', 
@@ -42,7 +42,7 @@
         'rgb(215, 210, 55)', 
         'rgb(0, 0, 0)'
     ];
-    let eyesColor = [
+    let eyesColors = [
         'black', 
         'red', 
         'blue', 
@@ -50,6 +50,7 @@
         'green'
     ];
 
+    const WIZARD_COUNT = 4;
 
     //* Получаем случайный индекс
     var random = function(min, max) {
@@ -61,8 +62,7 @@
         return array[random(0, array.length - 1)];
     };
 
-    // const WIZARD_COUNT = 4;
-
+    //TODO: Сделать функцию для создания рандомного персонажа
     for (let i = 0; i < WIZARD_COUNT; i++) {
         let wizardElement = similarWizardTemplate.cloneNode(true);
 
