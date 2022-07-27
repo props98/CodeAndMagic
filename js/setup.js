@@ -1,26 +1,63 @@
 "use strict";
 
-//* Находим и выводим окно выбора мага
-let setup = document.querySelector('.setup');
-setup.classList.remove('hidden');
+(function() {
 
-//* Ноходим и выводим блок с похожими магами
-document.querySelector('.setup-similar').classList.remove('hidden');
+    //* Выводим окно выбора мага
+    let setup = document.querySelector('.setup');
+    setup.classList.remove('hidden');
 
-//* Элемент куда будут вставленны похожие маги
-let similarListElement = document.querySelector('.setup-similar-list');
+    //* Выводим блок с похожими магами
+    document.querySelector('.setup-similar').classList.remove('hidden');
 
-//* Шаблон который будет копироваться и вставляться в элемент
-let similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+    //* Элемент куда будут вставленны похожие маги
+    let similarListElement = document.querySelector('.setup-similar-list');
 
-//* Данные с именами магов
-// const WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-const WIZARD_NAMES = ['Дамблдор', 'Волдеморт', 'Доктор Стрендж', 'Гарри Поттер'];
+    //* Шаблон который будет копироваться и вставляться в элемент
+    let similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-for (let i = 0; i < WIZARD_NAMES.length; i++) {
-    let wizardElement = similarWizardTemplate.cloneNode(true);
+    //* Данные для выбора случайного персонажа
+    const WIZARD_NAMES = [
+        'Иван', 
+        'Хуан Себастьян', 
+        'Мария', 'Кристоф', 
+        'Виктор', 'Юлия', 
+        'Люпита', 
+        'Вашингтон'
+    ];
+    const WIZARD_LAST_NAME = [
+        'да Марья', 
+        'Верон', 
+        'Мирабелла', 
+        'Вальц', 
+        'Онопко', 
+        'Топольницкая',
+        'Нионго', 
+        'Ирвинг'
+    ];
+    let coatColor = [
+        'rgb(101, 137, 164)', 
+        'rgb(241, 43, 107)', 
+        'rgb(146, 100, 161)', 
+        'rgb(56, 159, 117)', 
+        'rgb(215, 210, 55)', 
+        'rgb(0, 0, 0)'
+    ];
+    let eyesColor = [
+        'black', 
+        'red', 
+        'blue', 
+        'yellow', 
+        'green'
+    ];
 
-    wizardElement.querySelector('.setup-similar-label').textContent = WIZARD_NAMES[i];
+    const WIZARD_COUNT = 4;
 
-    similarListElement.appendChild(wizardElement);
-}
+    for (let i = 0; i < WIZARD_COUNT; i++) {
+        let wizardElement = similarWizardTemplate.cloneNode(true);
+
+        wizardElement.querySelector('.setup-similar-label').textContent = WIZARD_NAMES[i];
+
+        similarListElement.appendChild(wizardElement);
+    }
+
+})();
