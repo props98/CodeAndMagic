@@ -50,7 +50,18 @@
         'green'
     ];
 
-    const WIZARD_COUNT = 4;
+
+    //* Получаем случайный индекс
+    var random = function(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    };
+
+    //* Получаем случайный свойство по случайному индексу
+    var randomItem = function(array) {
+        return array[random(0, array.length - 1)];
+    };
+
+    // const WIZARD_COUNT = 4;
 
     for (let i = 0; i < WIZARD_COUNT; i++) {
         let wizardElement = similarWizardTemplate.cloneNode(true);
