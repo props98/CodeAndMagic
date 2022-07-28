@@ -6,9 +6,6 @@
     let setup = document.querySelector('.setup');
     setup.classList.remove('hidden');
 
-    //* Выводим блок с похожими магами
-    document.querySelector('.setup-similar').classList.remove('hidden');
-
     //* Шаблон который будет копироваться и вставляться в элемент
     let similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -81,6 +78,7 @@
             };
             
             //* Делаем глубокое клонирование присваиваем переменной wizardHTML
+            //* Случайным выбором изменяем имя, цвет плаща и цвет глаз
             wizardHTML = similarWizardTemplate.cloneNode(true);
             wizardHTML.querySelector('.setup-similar-label').textContent = wizards[i].name;
             wizardHTML.querySelector('.wizard-coat').style.fill = wizards[i].coat;
@@ -97,5 +95,7 @@
     let similarListElement = document.querySelector('.setup-similar-list');
     similarListElement.appendChild(generateWizard(WIZARD_COUNT));
     
+    //* Выводим блок с похожими магами
+    document.querySelector('.setup-similar').classList.remove('hidden');
 
 })();
