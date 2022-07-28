@@ -98,17 +98,16 @@
     similarListElement.appendChild(generateWizard(WIZARD_COUNT));
     
     //* Выводим блок с похожими магами
-    // document.querySelector('.setup-similar').classList.remove('hidden');
+    document.querySelector('.setup-similar').classList.remove('hidden');
 
     //TODO Сделать функции удаления и добавления класса hidden для элемента setup-similar
-    let toggleHidden = function(obj) {
-        if (obj.classList.contains('hidden')) {
-            obj.classList.remove('hidden');
-        } else {
-            obj.classList.add('hidden');
-        }
-    }
-
-    toggleHidden(document.querySelector('.setup-similar').classList.remove('hidden'));
+    // let toggleHidden = function(obj) {
+    //     if (obj.classList.contains('hidden')) {
+    //         obj.classList.remove('hidden');
+    //     } else {
+    //         obj.classList.add('hidden');
+    //     }
+    // }
+    // toggleHidden(document.querySelector('.setup-similar').classList.remove('hidden'));
 
 })();
