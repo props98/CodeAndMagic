@@ -9,9 +9,6 @@
     //* Выводим блок с похожими магами
     document.querySelector('.setup-similar').classList.remove('hidden');
 
-    //* Элемент куда будут вставленны похожие маги
-    let similarListElement = document.querySelector('.setup-similar-list');
-
     //* Шаблон который будет копироваться и вставляться в элемент
     let similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -19,8 +16,10 @@
     const WIZARD_NAMES = [
         'Иван', 
         'Хуан Себастьян', 
-        'Мария', 'Кристоф', 
-        'Виктор', 'Юлия', 
+        'Мария', 
+        'Кристоф', 
+        'Виктор', 
+        'Юлия', 
         'Люпита', 
         'Вашингтон'
     ];
@@ -50,8 +49,6 @@
         'green'
     ];
 
-    const WIZARD_COUNT = 4;
-
     //* Получаем случайный индекс
     var random = function(min, max) {
         return Math.round(Math.random() * (max - min) + min);
@@ -62,13 +59,43 @@
         return array[random(0, array.length - 1)];
     };
 
+
+    
     //TODO: Сделать функцию для создания рандомного персонажа
-    for (let i = 0; i < WIZARD_COUNT; i++) {
-        let wizardElement = similarWizardTemplate.cloneNode(true);
 
-        wizardElement.querySelector('.setup-similar-label').textContent = WIZARD_NAMES[i];
+    const WIZARD_COUNT = 4;
+    let wizards = [];
 
-        similarListElement.appendChild(wizardElement);
-    }
+    let generateWizard = function(count) {
+        
+        //* Храним содержимое всего фрагмента
+        let wizardsCloneElem = document.createDocumentFragment();
+        let wizardHTML;
+
+        for (let i = 0; i < count; i++) {
+            
+            wizards[i] = {
+                name: `${randomItem(WIZARD_NAMES)} ${randomItem(WIZARD_LAST_NAMES)}`,
+                coat: randomItem(coatColors),
+                eyes: randomItem(eyesColors)
+            };
+            
+            //* Делаем глубокое клонирование присваиваем переменной wizardHTML
+            wizardHTML = similarWizardTemplate.cloneNode(true);
+            wizardHTML.querySelector('.setup-similar-label').textContent = wizards[i].name;
+            wizardHTML.querySelector('.wizard-coat').style.fill = wizards[i].coat;
+            wizardHTML.querySelector('.wizard-eyes').style.fill = wizards[i].eyes;
+            wizardsCloneElem.appendChild(wizardHTML);
+        }
+
+        // console.log(wizardsCloneElem);
+        return wizardsCloneElem;
+        
+    };
+    
+    //* Элемент куда будут вставленны похожие маги
+    let similarListElement = document.querySelector('.setup-similar-list');
+    similarListElement.appendChild(generateWizard(WIZARD_COUNT));
+    
 
 })();
