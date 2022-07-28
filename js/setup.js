@@ -40,10 +40,12 @@
     ];
     let eyesColors = [
         'black', 
-        'red', 
+        'purple', 
         'blue', 
         'yellow', 
-        'green'
+        'green',
+        'grey',
+        'white'
     ];
 
     //* Получаем случайный индекс
@@ -97,5 +99,8 @@
     
     //* Выводим блок с похожими магами
     document.querySelector('.setup-similar').classList.remove('hidden');
+
+    //TODO Сделать функции удаления и добавления класса hidden для элемента setup-similar
+
 
 })();
