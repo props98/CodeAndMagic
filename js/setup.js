@@ -1,26 +1,114 @@
 "use strict";
 
-//* Находим и выводим окно выбора мага
-let setup = document.querySelector('.setup');
-setup.classList.remove('hidden');
+(function() {
 
-//* Ноходим и выводим блок с похожими магами
-document.querySelector('.setup-similar').classList.remove('hidden');
+    //* Выводим окно выбора мага
+    let setup = document.querySelector('.setup');
+    setup.classList.remove('hidden');
 
-//* Элемент куда будут вставленны похожие маги
-let similarListElement = document.querySelector('.setup-similar-list');
+    //* Шаблон который будет копироваться и вставляться в элемент
+    let similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-//* Шаблон который будет копироваться и вставляться в элемент
-let similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+    //* Данные для выбора случайного персонажа
+    const WIZARD_NAMES = [
+        'Иван', 
+        'Хуан Себастьян', 
+        'Мария', 
+        'Кристоф', 
+        'Виктор', 
+        'Юлия', 
+        'Люпита', 
+        'Вашингтон'
+    ];
+    const WIZARD_LAST_NAMES = [
+        'да Марья', 
+        'Верон', 
+        'Мирабелла', 
+        'Вальц', 
+        'Онопко', 
+        'Топольницкая',
+        'Нионго', 
+        'Ирвинг'
+    ];
+    let coatColors = [
+        'rgb(101, 137, 164)', 
+        'rgb(241, 43, 107)', 
+        'rgb(146, 100, 161)', 
+        'rgb(56, 159, 117)', 
+        'rgb(215, 210, 55)', 
+        'rgb(0, 0, 0)'
+    ];
+    let eyesColors = [
+        'black', 
+        'purple', 
+        'blue', 
+        'yellow', 
+        'green',
+        'grey',
+        'white'
+    ];
 
-//* Данные с именами магов
-// const WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-const WIZARD_NAMES = ['Дамблдор', 'Волдеморт', 'Доктор Стрендж', 'Гарри Поттер'];
+    //* Получаем случайный индекс
+    var random = function(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+    };
 
-for (let i = 0; i < WIZARD_NAMES.length; i++) {
-    let wizardElement = similarWizardTemplate.cloneNode(true);
+    //* Получаем случайный свойство по случайному индексу
+    var randomItem = function(array) {
+        return array[random(0, array.length - 1)];
+    };
 
-    wizardElement.querySelector('.setup-similar-label').textContent = WIZARD_NAMES[i];
 
-    similarListElement.appendChild(wizardElement);
-}
+    
+    //TODO: Сделать функцию для создания рандомного персонажа
+
+    const WIZARD_COUNT = 4;
+    let wizards = [];
+
+    let generateWizard = function(count) {
+        
+        //* Храним содержимое всего фрагмента
+        let wizardsCloneElem = document.createDocumentFragment();
+        let wizardHTML;
+
+        for (let i = 0; i < count; i++) {
+            
+            wizards[i] = {
+                name: `${randomItem(WIZARD_NAMES)} ${randomItem(WIZARD_LAST_NAMES)}`,
+                coat: randomItem(coatColors),
+                eyes: randomItem(eyesColors)
+            };
+            
+            //* Делаем глубокое клонирование присваиваем переменной wizardHTML
+            //* Случайным выбором изменяем имя, цвет плаща и цвет глаз
+            wizardHTML = similarWizardTemplate.cloneNode(true);
+            wizardHTML.querySelector('.setup-similar-label').textContent = wizards[i].name;
+            wizardHTML.querySelector('.wizard-coat').style.fill = wizards[i].coat;
+            wizardHTML.querySelector('.wizard-eyes').style.fill = wizards[i].eyes;
+            wizardsCloneElem.appendChild(wizardHTML);
+        }
+
+        // console.log(wizardsCloneElem);
+        return wizardsCloneElem;
+        
+    };
+    
+    //* Элемент куда будут вставленны похожие маги
+    let similarListElement = document.querySelector('.setup-similar-list');
+    similarListElement.appendChild(generateWizard(WIZARD_COUNT));
+    
+    //* Выводим блок с похожими магами
+    // document.querySelector('.setup-similar').classList.remove('hidden');
+
+    //TODO Сделать функции удаления и добавления класса hidden для элемента setup-similar
+    let toggleHidden = function(obj) {
+        if (obj.classList.contains('hidden')) {
+            obj.classList.remove('hidden');
+        } else {
+            obj.classList.add('hidden');
+        }
+    }
+
+    toggleHidden(document.querySelector('.setup-similar').classList.remove('hidden'));
+
+})();
