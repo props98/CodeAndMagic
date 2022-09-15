@@ -2,10 +2,6 @@
 
 (function() {
 
-    //* Выводим окно выбора мага
-    let setup = document.querySelector('.setup');
-    setup.classList.remove('hidden');
-
     //* Шаблон который будет копироваться и вставляться в элемент
     let similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -58,8 +54,6 @@
         return array[random(0, array.length - 1)];
     };
 
-
-    
     //TODO: Сделать функцию для создания рандомного персонажа
 
     const WIZARD_COUNT = 4;
@@ -100,14 +94,79 @@
     //* Выводим блок с похожими магами
     document.querySelector('.setup-similar').classList.remove('hidden');
 
-    //TODO Сделать функции удаления и добавления класса hidden для элемента setup-similar
-    // let toggleHidden = function(obj) {
-    //     if (obj.classList.contains('hidden')) {
-    //         obj.classList.remove('hidden');
-    //     } else {
-    //         obj.classList.add('hidden');
-    //     }
-    // }
-    // toggleHidden(document.querySelector('.setup-similar').classList.remove('hidden'));
 
+
+    //* Открытие / Закрытие окна настройки персонажа
+    //* Выводим окно выбора мага
+    let setup = document.querySelector('.setup');
+    let setupOpenIcon = document.querySelector('.setup-open');
+    let setupCloseIcon = document.querySelector('.setup-close');
+    const  ESCAPE = 27;
+    const  ENTER = 13;
+    
+    //* Open / Close setup
+    let onSetupEscPress = function(evt) {
+        if (evt.keyCode === ESCAPE) {
+            closeSetup();
+        }
+    };
+
+    let openSetup = function() {
+        setup.classList.remove('hidden');
+        document.addEventListener('keydown', onSetupEscPress);
+    };
+
+    let closeSetup = function() {
+        setup.classList.add('hidden');
+        document.removeEventListener('keydown', onSetupEscPress);
+    };
+
+    setupOpenIcon.addEventListener('click', function() {
+        openSetup();
+    });
+
+    setupOpenIcon.addEventListener('keydown', function(evt) {
+        if (evt.keyCode === ENTER) {
+            openSetup();
+        }
+    });
+
+    setupCloseIcon.addEventListener('click', function() {
+        closeSetup();
+    });
+
+    setupCloseIcon.addEventListener('keydown', function(evt) {
+        if (evt.keyCode === ENTER) {
+            closeSetup();
+        }
+    });
+
+
+    //* Check Valid
+    let userNameInput = setup.querySelector('.setup-user-name');
+
+    userNameInput.addEventListener('invalid', function(evt) {
+        if (userNameInput.validity.tooShort) {
+            userNameInput.setCustomValidity('Чувак, имя должно состоять минимум из 2-х символов');
+        } else if (userNameInput.validity.tooLong) {
+            userNameInput.setCustomValidity('Чувак, имя не должно превышать 25-ти символов');
+        } else if (userNameInput.validity.valueMissing) {
+            userNameInput.setCustomValidity('Чувак, обязательное поле')
+        } else {
+            userNameInput.setCustomValidity('');
+        }
+    });
+
+    userNameInput.addEventListener('input', function (evt) {
+        let target = evt.target;
+        if (target.value.length < 2) {
+            target.setCustomValidity('Чувак, имя должно состоять минимум из 2-х символов');
+        } else {
+            target.setCustomValidity('');
+        }
+    });
+
+
+    
+    
 })();
