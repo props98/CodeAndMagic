@@ -54,8 +54,6 @@
         return array[random(0, array.length - 1)];
     };
 
-    //TODO: Сделать функцию для создания рандомного персонажа
-
     const WIZARD_COUNT = 4;
     let wizards = [];
 
@@ -166,7 +164,10 @@
         }
     });
 
-
+    //Todo 3. Изменение цвета мантии персонажа по нажатию
+    //Todo 4. Изменение цвета глаз персонажа по нажатию
+    //Todo 5. Изменение цвета фаерболов по нажатию
+    //Todo 6. Форма должна отправляться на урл https://js.dump.academy/code-and-magick методом POST с типом multipart/form-data
     
     
 })();
