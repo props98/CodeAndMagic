@@ -24,25 +24,32 @@
         'Онопко', 
         'Топольницкая',
         'Нионго', 
-        'Ирвинг'
+        'Ирвинг',
     ];
-    let coatColors = [
+    const COAT_COLORS = [
         'rgb(101, 137, 164)', 
         'rgb(241, 43, 107)', 
         'rgb(146, 100, 161)', 
         'rgb(56, 159, 117)', 
         'rgb(215, 210, 55)', 
-        'rgb(0, 0, 0)'
+        'rgb(0, 0, 0)',
     ];
-    let eyesColors = [
+    const EYES_COLORS = [
         'black', 
         'purple', 
         'blue', 
         'yellow', 
         'green',
         'grey',
-        'white'
+        'white',
     ];
+    const FIREBALL_COLORS = [
+        '#ee4830',
+        '#30a8ee',
+        '#5ce6c0',
+        '#e848d5',
+        '#e6e848',
+      ];
 
     //* Получаем случайный индекс
     var random = function(min, max) {
@@ -67,8 +74,8 @@
             
             wizards[i] = {
                 name: `${randomItem(WIZARD_NAMES)} ${randomItem(WIZARD_LAST_NAMES)}`,
-                coat: randomItem(coatColors),
-                eyes: randomItem(eyesColors)
+                coat: randomItem(COAT_COLORS),
+                eyes: randomItem(EYES_COLORS)
             };
             
             //* Делаем глубокое клонирование присваиваем переменной wizardHTML
@@ -140,7 +147,7 @@
     });
 
 
-    //* Check Valid
+    //* Валидация ввода имени персонажа.
     let userNameInput = setup.querySelector('.setup-user-name');
 
     userNameInput.addEventListener('invalid', function(evt) {
@@ -164,9 +171,35 @@
         }
     });
 
-    //Todo 3. Изменение цвета мантии персонажа по нажатию
+
+    //* 3. Изменение цвета мантии персонажа по нажатию
+    let wizardCoat = document.querySelector('.wizard-coat');
+    let form = setup.querySelector('.setup-wizard-form');
+
+    let nextElement = function(array, element) {
+        let current = array.indexOf(element);
+        if (current !== array.length -1) {
+            return array[current + 1];
+        }
+        return array[0];
+    };
+    
+    wizardCoat.addEventListener('click', function() {
+        switchWizardCoatColor();
+    });
+
+    let switchWizardCoatColor = function() {
+        let wizardCoatColor = form.elements['coat-color'].value;
+        console.log(wizardCoatColor);
+        let nextColor = nextElement(COAT_COLORS, wizardCoatColor);
+        form.elements['coat-color'].value = nextColor;
+        wizardCoat.style.fill = nextColor;
+    };
+
     //Todo 4. Изменение цвета глаз персонажа по нажатию
+    
     //Todo 5. Изменение цвета фаерболов по нажатию
+
     //Todo 6. Форма должна отправляться на урл https://js.dump.academy/code-and-magick методом POST с типом multipart/form-data
     
     
