@@ -173,9 +173,11 @@
 
 
     //* 3. Изменение цвета мантии персонажа по нажатию
+    // Получаем нужные элементы
     let wizardCoat = document.querySelector('.wizard-coat');
     let form = setup.querySelector('.setup-wizard-form');
 
+    // Получаем слдедующий цвет в массиве
     let nextElement = function(array, element) {
         let current = array.indexOf(element);
         if (current !== array.length -1) {
@@ -184,20 +186,39 @@
         return array[0];
     };
     
+    // Отслеживаем событие клика по выбранному элементу
     wizardCoat.addEventListener('click', function() {
         switchWizardCoatColor();
     });
 
+    // Магия выбора следующего цвета
+    // Нахождене нужного элемента по атрибуту name
+    // Вставка следующего цвета в атрибут value
+    // Перекрашивание элемента при клике в следующий цвет
     let switchWizardCoatColor = function() {
+        // Получение атрибута value мага
         let wizardCoatColor = form.elements['coat-color'].value;
-        console.log(wizardCoatColor);
+        // console.log(wizardCoatColor);
         let nextColor = nextElement(COAT_COLORS, wizardCoatColor);
         form.elements['coat-color'].value = nextColor;
         wizardCoat.style.fill = nextColor;
     };
 
-    //Todo 4. Изменение цвета глаз персонажа по нажатию
-    
+    //* 4. Изменение цвета глаз персонажа по нажатию
+    let wizardEyes = document.querySelector('.wizard-eyes');
+
+    wizardEyes.addEventListener('click', function() {
+        switchWIzardEyesColor();
+    });
+
+    let switchWIzardEyesColor = function() {
+        let wizardEyesColor = form.elements['eyes-color'].value;
+        // console.log(wizardEyesColor);
+        let nextColor = nextElement(EYES_COLORS, wizardEyesColor);
+        form.elements['eyes-color'].value = nextColor;
+        wizardEyes.style.fill = nextColor;
+    };
+
     //Todo 5. Изменение цвета фаерболов по нажатию
 
     //Todo 6. Форма должна отправляться на урл https://js.dump.academy/code-and-magick методом POST с типом multipart/form-data
