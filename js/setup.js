@@ -219,7 +219,19 @@
         wizardEyes.style.fill = nextColor;
     };
 
-    //Todo 5. Изменение цвета фаерболов по нажатию
+    //* 5. Изменение цвета фаерболов по нажатию
+    let fireball = document.querySelector('.setup-fireball-wrap');
+
+    fireball.addEventListener('click', function() {
+        switchFireballColor();
+    });
+
+    let switchFireballColor = function() {
+        let fireballColor = form.elements['fireball-color'].value;
+        let nextColor = nextElement(FIREBALL_COLORS, fireballColor);
+        form.elements['fireball-color'].value = nextColor;
+        fireball.style.backgroundColor = nextColor;
+    };
 
     //Todo 6. Форма должна отправляться на урл https://js.dump.academy/code-and-magick методом POST с типом multipart/form-data
     
