@@ -233,7 +233,7 @@
         fireball.style.backgroundColor = nextColor;
     };
 
-    //Todo 6. Форма должна отправляться на урл https://js.dump.academy/code-and-magick методом POST с типом multipart/form-data
+    //* 6. Форма должна отправляться на урл https://js.dump.academy/code-and-magick методом POST с типом multipart/form-data
     
     
 })();
